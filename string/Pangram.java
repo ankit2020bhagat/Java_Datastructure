@@ -1,31 +1,27 @@
-package java_datastructure.string;
 
 public class Pangram {
 
-    static boolean pangram(String str){
-        int iMAXcount = 26;
-        boolean[] fre=new boolean[iMAXcount];
-         for(int i=0;i<str.length();i++){
-            char ch = str.charAt(i);
-            if(ch>='a' && ch<='z'){
-              fre[ch-'a']= true;
-            }
-            else if (ch>='A' && ch <='Z'){
-                fre[ch-'A']= true;
-            }
-         } 
+    static boolean pangram(String str) {
+        boolean found = false;
+        for (char ch = 'a'; ch <= 'z'; ch++) {
 
-         for(int i=0;i<iMAXcount;i++){
-            if(!fre[i]){
+            for (int i = 0; i < str.length(); i++) {
+                if (ch == Character.toLowerCase(str.charAt(i))) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 return false;
             }
-         }
-         return true;
+
+        }
+        return true;
+
     }
-    
+
     public static void main(String[] args) {
-       String str = "The quick brown fox jumps over the layz dog";
-      boolean res= pangram(str);
-      System.out.println(res);
+        String str = "The quick brown fox jumps over the dog";
+        System.out.println(pangram(str));
     }
 }

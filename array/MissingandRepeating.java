@@ -1,50 +1,24 @@
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 public class MissingandRepeating {
-    static ArrayList<Integer> findTwoElement(int[] arr) {
-        int n = arr.length;
 
-        // Creating frequency array of size n+1 with
-        // initial values as 0. Note that array
-        // values will go upto n, that is why we 
-        // have taken the size as n+1
-        int[] freq = new int[n + 1]; 
+    public static void missingRepeating(int[] arr) {
         int repeating = -1;
-        int missing = -1;
-
-        // Find the frequency of all elements.
-        for (int i = 0; i < n; i++) {
-            freq[arr[i]]++;
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        for (int data : arr) {
+            freq.put(data, freq.getOrDefault(data, 0) + 1);
         }
-        for(int i =0;i<n;i++){
-            System.out.println(freq[i]);
-        }
-
-        for (int i = 1; i <= n; i++) {
-
-            // For missing element, frequency
-            // will be 0.
-            if (freq[i] == 0) {
-                missing = i;
-            }
-
-            // For repeating element, frequency
-            // will be 2.
-            else if (freq[i] == 2) {
-                repeating = i;
+        for (int key : freq.keySet()) {
+            if (freq.get(key) > 1) {
+                repeating = key;
             }
         }
-
-        ArrayList<Integer> result = new ArrayList<>();
-        result.add(repeating);
-        result.add(missing);
-        return result;
+        System.out.println(repeating);
     }
 
     public static void main(String[] args) {
-        int[] arr = {8, 1, 8};
-        ArrayList<Integer> ans = findTwoElement(arr);
-
-        System.out.println(ans.get(0) + " " + ans.get(1));
+        int[] arr = { 4, 3, 6, 2, 1, 1 };
+        missingRepeating(arr);
     }
 }

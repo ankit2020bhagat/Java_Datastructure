@@ -1,20 +1,29 @@
-package java_datastructure.string;
-import java.util.*;
+
 public class Camelcaseofagivensentence {
-    static void camelCase(String s){
-    
-        ArrayList<String> worldList  = new ArrayList<>(Arrays.asList(s.split(" ")));
-        for (int i=1;i<worldList.size();i++){
-            String newStr =worldList.get(i);
-            System.out.println(Character.toUpperCase(newStr.charAt(0)));
+
+    public static String convertCamelCase(String str) {
+
+        StringBuilder res = new StringBuilder();
+        boolean flag = false;
+        for (int i = 0; i < str.length(); i++) {
+
+            if (str.charAt(i) == ' ') {
+                flag = true;
+            } else if (flag) {
+                res.append(Character.toUpperCase(str.charAt(i)));
+                flag = false;
+            } else {
+                res.append(str.charAt(i));
+            }
         }
-     }
-    
-     public static void main(String[] args) {
-        String str ="Ankit kumar bhagat";
-        camelCase(str);
-     }
-       
+        return res.toString();
+
+    }
+
+    public static void main(String[] args) {
+
+        String str = "ankit kumar";
+        System.out.println(convertCamelCase(str));
+    }
+
 }
-
-
